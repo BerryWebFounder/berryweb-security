@@ -24,6 +24,10 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('springCloudVersion', "2024.0.0")
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     compileOnly 'org.projectlombok:lombok'
@@ -37,6 +41,12 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.3'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 tasks.named('test') {
