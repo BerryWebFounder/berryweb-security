@@ -1,6 +1,10 @@
 package com.berryweb.security.config;
 
 import com.berryweb.security.jwt.JwtTokenProvider;
+import feign.RequestInterceptor;
+import feign.RequestTemplate;
+import feign.Retryer;
+import feign.codec.ErrorDecoder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

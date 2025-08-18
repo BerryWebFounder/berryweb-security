@@ -24,12 +24,14 @@ public class AuthController {
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder passwordEncoder;
 
+    // 실제 운영에서는 DB에서 가져와야 함 (미리 인코딩된 비밀번호)
+    private static final String ENCODED_PASSWORD = "$2a$10$GRLdNijSQMUvl/au9ofL.eDDmxTlHQGe3TGV2l3RuV8SbLKOJ.1Kq"; // "password"
+
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
-        // 실제로는 UserDetailsService를 통해 사용자 인증
-        // 여기서는 간단한 예시
+        // 사용자 검증 (실제로는 UserDetailsService 사용)
         if (!"admin".equals(request.getUsername()) ||
-                !passwordEncoder.matches(request.getPassword(), passwordEncoder.encode("password"))) {
+                !passwordEncoder.matches(request.getPassword(), ENCODED_PASSWORD)) {
             throw new BadCredentialsException("Invalid credentials");
         }
 
@@ -39,6 +41,8 @@ public class AuthController {
         );
 
         String refreshToken = jwtTokenProvider.createRefreshToken(request.getUsername());
+
+        log.info("User '{}' logged in successfully", request.getUsername());
 
         return ResponseEntity.ok(Map.of(
                 "accessToken", accessToken,
@@ -58,6 +62,8 @@ public class AuthController {
                 username,
                 Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"))
         );
+
+        log.info("Token refreshed for user '{}'", username);
 
         return ResponseEntity.ok(Map.of(
                 "accessToken", newAccessToken,

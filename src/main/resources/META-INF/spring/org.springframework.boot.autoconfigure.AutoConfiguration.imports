@@ -1,0 +1,2 @@
+com.berryweb.security.config.SecurityAutoConfiguration
+com.berryweb.security.config.FeignAutoConfiguration

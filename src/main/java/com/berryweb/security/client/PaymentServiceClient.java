@@ -1,6 +1,8 @@
 package com.berryweb.security.client;
 
 import com.berryweb.security.config.FeignClientConfig;
+import com.berryweb.security.dto.PaymentRequestDto;
+import com.berryweb.security.dto.PaymentResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,7 +1,7 @@
 package com.berryweb.security.client;
 
-import com.berryweb.inventory.dto.InventoryResponseDto;
-import com.berryweb.inventory.dto.StockReservationRequestDto;
+import com.berryweb.security.dto.InventoryResponseDto;
+import com.berryweb.security.dto.StockReservationRequestDto;
 import com.berryweb.security.config.FeignClientConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;

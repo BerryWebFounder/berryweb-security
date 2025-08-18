@@ -2,27 +2,30 @@ spring:
   application:
     name: security
   
-# JWT ??
+  # Spring Cloud 기능 모두 비활성화
+  cloud:
+    config:
+      enabled: false
+    discovery:
+      enabled: false
+    loadbalancer:
+      enabled: false
+    openfeign:
+      enabled: false
+
+# Eureka 비활성화
+eureka:
+  client:
+    enabled: false
+
+# JWT 테스트 설정
 jwt:
-  secret: mySecretKeyThatIsLongEnoughForHMACAlgorithmAtLeast256BitsLong
+  secret: testSecretKeyThatIsLongEnoughForHMACAlgorithmAtLeast256BitsLong
   token-validity-in-seconds: 3600
   refresh-token-validity-in-seconds: 86400
-  
-# ??? URL ??
-service:
-  payment:
-    url: http://localhost:8085
-  inventory:
-    url: http://localhost:8086
-  
-# ?? ??
+
+# 로깅 레벨 낮춤
 logging:
   level:
-    com:
-      berryweb:
-        security: DEBUG
-    feign: DEBUG
-  
-# ?? ??
-server:
-  port: 8087
+    root: WARN
+    com.berryweb.security: INFO
